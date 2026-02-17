@@ -35,7 +35,7 @@ This filtered the data down to only email activity.
 
 ---
 
-### 2. Fix the time range (common SOC step)
+### 2. Fix the time range 
 Initially, no logs appeared because Splunk was only searching the last 6 hours.
 
 I expanded the time range to include the alert timestamp.
