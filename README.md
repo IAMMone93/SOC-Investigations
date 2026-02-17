@@ -1,5 +1,4 @@
 # SOC Alert Investigations
-# phishing email Alert
 
 This repo shows a real phishing alert investigation I completed using Splunk (SIEM).
 
