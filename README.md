@@ -1,8 +1,10 @@
 # SOC Alert Investigations
 
-This repo shows a real phishing alert investigation I completed using Splunk (SIEM).
+This repo shows a real phishing alert investigation I completed using the SIEM Tool Splunk. 
  
-The goal of this project was to practice how SOC analysts triage alerts, validate whether they are real threats, and document their findings.
+The goal of this project was to practice how Tier 1 SOC analysts triage alerts, validate whether they are real threats, and document their findings.
+In this project, the alert I investigated was a phishing email. Below I will provide the steps I used to triage the alert and what 
+what my observations were about the alert.
 
 ---
 
@@ -15,20 +17,22 @@ My task was to investigate the alert in Splunk and determine if it was a True Po
 
 ## What Happened
 
-The security system flagged an email as suspicious because it came from an external domain using an unusual top-level domain (.me).
+The security system flagged an email as suspicious because it came from an 
+external domain using an unusual top level domain (.me).
 
-Basically, the system said:
-"Hey… this email looks sketchy. Someone should check it."
 
-So I investigated it using Splunk.
 
 ---
 
-## Investigation Workflow (SOC Triage Process)
+## SOC Triage Process 
 
 ### 1. Search the correct log source
-I started by searching email logs in Splunk:
+Logs are the timeline a SOC uses to investigate what happened on a system or network.
+They record things like logins, errors, process activity, and network connections, 
+and analysts use them in a SIEM to detect alerts, investigate incidents, and figure 
+out if something malicious is going on.
 
+I started by searching email logs in Splunk:
 index=* datasource=email
 
 This filtered the data down to only email activity.
@@ -38,18 +42,15 @@ This filtered the data down to only email activity.
 ### 2. Fix the time range 
 Initially, no logs appeared because Splunk was only searching the last 6 hours.
 
-I expanded the time range to include the alert timestamp.
-
-This is a very common real-world SIEM troubleshooting step.
-
----
+I expanded the time range to include the alert timestamp which was a crucial step 
+because initially I had an issue finding the time due to so many alerts at that time. 
 
 ### 3. Narrow down to the affected mailbox
 I filtered logs to the recipient mailbox:
 
 recipient="support@tryhatme.com"
 
-This reduced the data from all company emails → emails sent to the affected user.
+This reduced the data from all company emails down to emails sent to the affected user.
 
 ---
 
@@ -76,13 +77,15 @@ After reviewing the event, I identified multiple phishing indicators:
 
 After reviewing the evidence, the alert was classified as:
 
-**TRUE POSITIVE — Confirmed phishing attempt**
+**TRUE POSITIVE - Confirmed phishing attempt**
 
 Meaning the alert correctly identified a real threat.
 
 ---
 
-## Recommended Remediation (What a SOC would do)
+## Recommended Remediation 
+
+In this phishing attempt, I recommend that:
 
 • Block the sender domain at the email gateway  
 • Search for similar emails across the environment  
@@ -95,9 +98,8 @@ Meaning the alert correctly identified a real threat.
 • Splunk SIEM searching  
 • Log filtering and time range troubleshooting  
 • Email threat investigation  
-• Alert triage (True Positive vs False Positive)  
+• Alert triage   
 • Basic incident documentation  
 
----
 
-This project simulates the type of investigation performed by an entry-level SOC analyst.
+
