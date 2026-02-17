@@ -1,7 +1,7 @@
 # SOC Alert Investigations
 
 This repo shows a real phishing alert investigation I completed using Splunk (SIEM).
-
+ 
 The goal of this project was to practice how SOC analysts triage alerts, validate whether they are real threats, and document their findings.
 
 ---
